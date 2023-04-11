@@ -22,8 +22,8 @@ const useTimer = (startValue = 0) => {
         setIsRunning(false)
     }
 
-    const handleSave = () => {
-        // nånting fetch saveTime
+    const handleSave = (/*skicka med tiden*/) => {
+        // fetch POST saveTime
         setIsRunning(false)
         clearInterval(countRef.current)
         setTimer(0)

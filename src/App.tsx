@@ -1,6 +1,7 @@
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Grid, GridItem, ListItem, UnorderedList } from '@chakra-ui/react'
 import NavBar from './components/NavBar'
 import Buttons from './components/Buttons'
+import GetTimes from './components/ListSavedTImes'
 
 function App() {
  
@@ -15,7 +16,6 @@ function App() {
         <GridItem area="main">
           {/* tidtagaruret */}
           <Buttons />
-          {/* lista sparade tider */}
         </GridItem>
       </Grid>
     </>
