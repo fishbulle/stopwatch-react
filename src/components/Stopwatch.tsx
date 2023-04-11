@@ -3,15 +3,18 @@ import { Button, Stack } from '@chakra-ui/react'
 import { FaPlay, FaPause, FaStop, FaSave } from 'react-icons/fa'
 import { RxReset } from 'react-icons/rx'
 
-const Stopwatch = () => {
+interface Props {
+    save: (id: number, time: number) => void
+}
+
+const Stopwatch = ({ save }: Props) => {
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
-    const [isPaused, setIsPaused] = useState(true);
 
     useEffect(() => {
         let interval: any;
 
-        if (isRunning && isPaused === false)
+        if (isRunning)
             interval = setInterval(() => {
                 setTime(time => time + 1)
             }, 1000);
@@ -21,7 +24,7 @@ const Stopwatch = () => {
         return () => {
             clearInterval(interval)
         }
-    }, [isRunning, isPaused]);
+    }, [isRunning]);
 
     return (
         <>
@@ -29,16 +32,13 @@ const Stopwatch = () => {
                 <Button onClick={() => setIsRunning(true)} leftIcon={<FaPlay />} colorScheme='pink' variant='solid'>
                     Start
                 </Button>
-                <Button onClick={() => setIsPaused(true)} leftIcon={<FaPause />} colorScheme='pink' variant='solid'>
-                    Pause
-                </Button>
                 <Button onClick={() => setIsRunning(false)} leftIcon={<FaStop />} colorScheme='pink' variant='solid'>
                     Stop
                 </Button>
                 <Button onClick={() => setTime(0)} leftIcon={<RxReset />} colorScheme='pink' variant='solid'>
                     Reset
                 </Button>
-                <Button onClick={() => console.log('SAVING...')} leftIcon={<FaSave />} colorScheme='pink' variant='solid'>
+                <Button onClick={() => {save(0, time); setTime(0)}} leftIcon={<FaSave />} colorScheme='pink' variant='solid'>
                     Save
                 </Button>
             </Stack>
