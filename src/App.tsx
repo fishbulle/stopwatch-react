@@ -1,5 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import NavBar from './components/NavBar'
+import Buttons from './components/Buttons'
 
 function App() {
  
@@ -12,6 +13,9 @@ function App() {
           <NavBar />
         </GridItem>
         <GridItem area="main">
+          {/* tidtagaruret */}
+          <Buttons />
+          {/* lista sparade tider */}
         </GridItem>
       </Grid>
     </>
