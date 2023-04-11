@@ -1,13 +1,13 @@
-import { HStack, Image } from "@chakra-ui/react"
+import { HStack, Image, Heading } from "@chakra-ui/react"
 import stopwatch from '../assets/stopwatch.png'
 import ColorModeSwitch from "./ColorModeSwtich"
 
 
 const NavBar = () => {
     return (
-        <HStack justifyContent='space-between' padding='10px'>
+        <HStack justifyContent='space-between' padding='40px'>
             <Image src={stopwatch} boxSize="70px" />
-            <h1>NÅN TITEL HÄR</h1>
+            <Heading as='h2' size='lg'>STOPWATCH</Heading>
             <ColorModeSwitch />
         </HStack>
     )
