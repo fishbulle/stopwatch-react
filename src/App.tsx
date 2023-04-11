@@ -13,7 +13,7 @@ function App() {
           <NavBar />
         </GridItem>
         <GridItem area="main">
-          <Stopwatch />
+          <Stopwatch save={(id, time) => save(id, time)} />
           {/* <SavedTimes /> */}
         </GridItem>
       </Grid>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Button, Stack } from '@chakra-ui/react'
-import { FaPlay, FaPause, FaStop, FaSave } from 'react-icons/fa'
+import { FaPlay, FaStop, FaSave } from 'react-icons/fa'
 import { RxReset } from 'react-icons/rx'
 
 interface Props {
@@ -19,7 +19,7 @@ const Stopwatch = ({ save }: Props) => {
                 setTime(time => time + 1)
             }, 1000);
         else
-            clearInterval(interval);
+            clearInterval(interval)
 
         return () => {
             clearInterval(interval)
@@ -28,7 +28,7 @@ const Stopwatch = ({ save }: Props) => {
 
     return (
         <>
-            <Stack direction='row' spacing={4} justifyContent="center">
+            <Stack direction='row' spacing={5} justifyContent="center">
                 <Button onClick={() => setIsRunning(true)} leftIcon={<FaPlay />} colorScheme='pink' variant='solid'>
                     Start
                 </Button>
@@ -38,7 +38,10 @@ const Stopwatch = ({ save }: Props) => {
                 <Button onClick={() => setTime(0)} leftIcon={<RxReset />} colorScheme='pink' variant='solid'>
                     Reset
                 </Button>
-                <Button onClick={() => {save(0, time); setTime(0)}} leftIcon={<FaSave />} colorScheme='pink' variant='solid'>
+                <Button onClick={() => {
+                    save(0, time)
+                    setTime(0)
+                }} leftIcon={<FaSave />} colorScheme='pink' variant='solid'>
                     Save
                 </Button>
             </Stack>
