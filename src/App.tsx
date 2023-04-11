@@ -8,19 +8,14 @@ function App() {
   return (
     <>
       <Grid templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`
+        base: `"nav" "main"`
       }}>
         <GridItem area="nav">
           <NavBar />
         </GridItem>
-        <Show above="lg">
-          <GridItem area="aside">
-            Saved Times Here
-          </GridItem>
-        </Show>
         <GridItem area="main">
           <Stopwatch />
+          {/* <SavedTimes /> */}
         </GridItem>
       </Grid>
     </>
