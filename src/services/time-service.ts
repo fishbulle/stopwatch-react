@@ -5,4 +5,4 @@ export interface Time {
     time: number
 }
 
-export default create()
+export default create('/api/timer')

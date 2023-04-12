@@ -27,10 +27,6 @@ class HttpService {
     create<T>(entity: T) {
         return apiClient.post(this.endpoint, entity)
     }
-
-    update<T extends Entity>(entity: T) {
-        return apiClient.put(this.endpoint + '/' + entity.id, entity)
-    }
 }
 
 const create = (endpoint: string) => new HttpService(endpoint);

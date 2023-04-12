@@ -1,10 +1,42 @@
 import { Button, Stack } from '@chakra-ui/react'
 import { FaPlay, FaStop, FaSave } from 'react-icons/fa'
 import { RxReset } from 'react-icons/rx'
-import useTimer from '../hooks/useTimer'
+import { useRef, useState } from 'react'
 
-const Stopwatch = () => {
-    const { handleStart, handleReset, handleStop, handleSave } = useTimer(0)
+const Buttons = (startValue = 0) => {
+    const [timer, setTimer] = useState(startValue)
+    const [isRunning, setIsRunning] = useState(false)
+    const countRef = useRef(0)
+
+    // fetch sparade tider
+
+    const handleStart = () => {
+        setIsRunning(true)
+        countRef.current = setInterval(() => {
+            setTimer((timer) => timer + 1)
+        }, 1000)
+    }
+
+    const handleReset = () => {
+        clearInterval(countRef.current)
+        setIsRunning(false)
+        setTimer(0)
+    }
+
+    const handleStop = () => {
+        setIsRunning(false)
+    }
+
+    const handleSave = (/*skicka med tiden*/) => {
+        // fetch POST saveTime
+        setIsRunning(false)
+        clearInterval(countRef.current)
+        setTimer(0)
+    }
+
+    const handleDelete = () => {
+        // fetch delete
+    }
 
     return (
         <>
@@ -26,4 +58,4 @@ const Stopwatch = () => {
     )
 }
 
-export default Stopwatch
+export default Buttons
