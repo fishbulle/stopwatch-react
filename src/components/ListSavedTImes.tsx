@@ -1,29 +1,38 @@
 
-// import { ListItem, UnorderedList, Table, Thead, Tbody, Tr, Th, Td, TableContainer, Button } from "@chakra-ui/react"
-// import axios from "axios"
-// import { useEffect, useState } from "react"
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Button, TableCaption, Container } from "@chakra-ui/react"
+import useTimes from "../hooks/useTimes";
+import showTime from "./Stopwatch";
+
+function ListTimes() {
+    const { times } = useTimes();
 
 
-//     return (
-//         <>
-//             <TableContainer>
-//                 <Table variant='striped' colorScheme='pink'>
-//                     <Thead>
-//                         <Tr>
-//                             <Th>Time</Th>
-//                             <Th>Delete</Th>
-//                         </Tr>
-//                     </Thead>
-//                     <Tbody>
-//                         <Tr key="">
-//                             <Td></Td>
-//                             <Td><Button>Delete</Button></Td>
-//                         </Tr>
-//                     </Tbody>
-//                 </Table>
-//             </TableContainer>
-//         </>
-//     )
-// }
+    return (
+        <>
+            <Container maxW='md' centerContent>
+                <TableContainer>
+                    <Table size='md' variant='striped' colorScheme='pink'>
+                        <TableCaption>Saved Times</TableCaption>
+                        <Thead>
+                            <Tr>
+                                <Th>Time</Th>
+                                <Th></Th>
+                                <Th>Remove</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            {times.map(time =>
+                                <Tr key={time.id}>
+                                    <Td>{showTime(time.time)}</Td>
+                                    <Td></Td>
+                                    <Td><Button size='sm'>Delete</Button></Td>
+                                </Tr>)}
+                        </Tbody>
+                    </Table>
+                </TableContainer>
+            </Container>
+        </>
+    )
+}
 
-// export default ListTimes
+export default ListTimes
