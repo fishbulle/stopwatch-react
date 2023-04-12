@@ -5,6 +5,8 @@ const useTimer = (startValue = 0) => {
     const [isRunning, setIsRunning] = useState(false)
     const countRef = useRef(0)
 
+    // fetch sparade tider
+
     const handleStart = () => {
         setIsRunning(true)
         countRef.current = setInterval(() => {
@@ -29,7 +31,11 @@ const useTimer = (startValue = 0) => {
         setTimer(0)
     }
 
-    return { timer, isRunning, handleStart, handleReset, handleStop, handleSave }
+    const handleDelete = () => {
+        // fetch delete
+    }
+
+    return { timer, isRunning, handleStart, handleReset, handleStop, handleSave, handleDelete }
 }
 
 export default useTimer
