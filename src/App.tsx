@@ -7,15 +7,18 @@ function App() {
 
   return (
     <>
-      <Grid templateAreas={{
-        base: `"nav" "main"`
-      }}>
+      <Grid templateAreas={`"nav nav"
+                            "main main"
+                            "footer footer"`}
+            gap='20'>
         <GridItem area="nav">
           <NavBar />
         </GridItem>
         <GridItem area="main">
           {/* tidtagaruret */}
-          {/* <Buttons /> */}
+          <Buttons />
+        </GridItem>
+        <GridItem area="footer">
           <ListTimes />
         </GridItem>
       </Grid>

@@ -1,5 +1,6 @@
 
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Button, TableCaption, Container } from "@chakra-ui/react"
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Button, TableCaption, Container, IconButton } from "@chakra-ui/react"
+import { AiTwotoneDelete } from 'react-icons/ai'
 import useTimes from "../hooks/useTimes";
 import showTime from "./Stopwatch";
 
@@ -17,16 +18,21 @@ function ListTimes() {
                             <Tr>
                                 <Th>Time</Th>
                                 <Th></Th>
-                                <Th>Remove</Th>
+                                <Th></Th>
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {times.map(time =>
+                            {times.map(time => (
                                 <Tr key={time.id}>
                                     <Td>{showTime(time.time)}</Td>
                                     <Td></Td>
-                                    <Td><Button size='sm'>Delete</Button></Td>
-                                </Tr>)}
+                                    <Td>
+                                        <IconButton
+                                            size='sm'
+                                            aria-label='Delete'
+                                            icon={<AiTwotoneDelete />} />
+                                    </Td>
+                                </Tr>))}
                         </Tbody>
                     </Table>
                 </TableContainer>
