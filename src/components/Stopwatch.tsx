@@ -37,10 +37,12 @@ const Stopwatch = () => {
     }, [isRunning])
 
 
-    const handleSave = (id: number, time: number) => {
+    const handleSave = (id: number, time: number, date: number) => {
         // fetch POST saveTime
-        timeService.create({ id, time })
-            .then(({ data: savedTime }) => setTimes([savedTime, ...times]))
+        timeService.create({ id, time, date })
+            .then(({ data: savedTime }) => {
+                setTimes([savedTime, ...times])
+            })
             .catch(err => setError(err.message))
 
         setTimer(0)
@@ -77,12 +79,12 @@ const Stopwatch = () => {
                 <Button onClick={() => setTimer(0)} leftIcon={<RxReset />} colorScheme='pink' variant='solid'>
                     Reset
                 </Button>
-                <Button onClick={() => handleSave(0, timer)} leftIcon={<FaSave />} colorScheme='pink' variant='solid'>
+                <Button onClick={() => handleSave(0, timer, 0)} leftIcon={<FaSave />} colorScheme='pink' variant='solid'>
                     Save
                 </Button>
             </Stack>
 
-            <Container mt="50px" maxW='md' centerContent>
+            <Container mt="50px" maxW='lg' centerContent>
                 {error && <Text>{error}</Text>}
                 <TableContainer>
                     <Table size='md' variant='striped' colorScheme='pink'>
@@ -90,7 +92,7 @@ const Stopwatch = () => {
                         <Thead>
                             <Tr>
                                 <Th>Time</Th>
-                                <Th></Th>
+                                <Th>Date</Th>
                                 <Th></Th>
                             </Tr>
                         </Thead>
@@ -98,7 +100,7 @@ const Stopwatch = () => {
                             {times.map(time => (
                                 <Tr key={time.id}>
                                     <Td>{showTime(time.time)}</Td>
-                                    <Td></Td>
+                                    <Td>{time.date}</Td>
                                     <Td>
                                         <IconButton
                                             onClick={() => handleDelete(time)}
