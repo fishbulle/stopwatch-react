@@ -8,9 +8,7 @@ import useTimes from '../hooks/useTimes'
 const Stopwatch = () => {
     const [timer, setTimer] = useState(0)
     const [isRunning, setIsRunning] = useState(false)
-    const [storeTime, setStoreTime] = useState(false)
     const { times, setTimes, error, setError } = useTimes()
-    const updateList = () => setStoreTime(!storeTime)
 
     useEffect(() => {
         let interval: any;
@@ -33,10 +31,7 @@ const Stopwatch = () => {
 
         // fetch POST saveTime
         timeService.create({ id, time })
-            .then(({ data: savedTime }) => {
-                setTimes([savedTime, ...times])
-            })
-            .then(() => updateList())
+            .then(({ data: savedTime }) => setTimes([savedTime, ...times]))
             .catch(err => setError(err.message))
 
         setTimer(0)

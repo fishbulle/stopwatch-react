@@ -1,8 +1,8 @@
 
-import { Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer, TableCaption, Container, IconButton } from "@chakra-ui/react"
+import { Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer, TableCaption, Container, IconButton } from '@chakra-ui/react'
 import { AiTwotoneDelete } from 'react-icons/ai'
-import useTimes from "../hooks/useTimes";
-import timeService, { Time } from "../services/time-service";
+import useTimes from '../hooks/useTimes'
+import timeService, { Time } from '../services/time-service'
 
 const showTime = (timer: number) => {
     const hours = Math.floor(timer / 360000)
@@ -23,9 +23,7 @@ function ListTimes() {
 
         // Delete saved time fetch
         timeService.delete(time.id)
-            .catch(err => {
-                setError(err.message)
-            })
+            .catch(err => setError(err.message))
     }
 
     return (

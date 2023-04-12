@@ -10,7 +10,7 @@ function App() {
       <Grid templateAreas={`"nav nav"
                             "main main"
                             "footer footer"`}
-            gap='100'>
+        gap='100'>
         <GridItem area="nav">
           <NavBar />
         </GridItem>
