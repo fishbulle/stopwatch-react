@@ -1,9 +1,21 @@
-import { Box, Button, Center, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Stack, Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer, TableCaption, Container, IconButton } from '@chakra-ui/react'
 import { FaPlay, FaStop, FaSave } from 'react-icons/fa'
 import { RxReset } from 'react-icons/rx'
 import { useEffect, useState } from 'react'
-import timeService from '../services/time-service'
+import { AiTwotoneDelete } from 'react-icons/ai'
+import timeService, { Time } from '../services/time-service'
 import useTimes from '../hooks/useTimes'
+
+const showTime = (time: number) => {
+    const minutes = Math.floor((time / 60000) % 60)
+    const seconds = Math.floor((time / 1000) % 60)
+    const milliseconds = (time / 10) % 100
+
+    if (minutes < 1)
+        return `${seconds}s ${milliseconds}ms`
+
+    return `${minutes}m ${seconds}s ${milliseconds}ms`
+}
 
 const Stopwatch = () => {
     const [timer, setTimer] = useState(0)
@@ -26,15 +38,20 @@ const Stopwatch = () => {
 
 
     const handleSave = (id: number, time: number) => {
-        const newSaveTime = { id, time }
-        setTimes([newSaveTime, ...times])
-
         // fetch POST saveTime
         timeService.create({ id, time })
             .then(({ data: savedTime }) => setTimes([savedTime, ...times]))
             .catch(err => setError(err.message))
 
         setTimer(0)
+    }
+
+    const handleDelete = (time: Time) => {
+        setTimes(times.filter(t => t.id !== time.id))
+
+        // Delete saved time fetch
+        timeService.delete(time.id)
+            .catch(err => setError(err.message))
     }
 
     return (
@@ -64,6 +81,36 @@ const Stopwatch = () => {
                     Save
                 </Button>
             </Stack>
+
+            <Container mt="50px" maxW='md' centerContent>
+                {error && <Text>{error}</Text>}
+                <TableContainer>
+                    <Table size='md' variant='striped' colorScheme='pink'>
+                        <TableCaption mb='20px'>Saved Times</TableCaption>
+                        <Thead>
+                            <Tr>
+                                <Th>Time</Th>
+                                <Th></Th>
+                                <Th></Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            {times.map(time => (
+                                <Tr key={time.id}>
+                                    <Td>{showTime(time.time)}</Td>
+                                    <Td></Td>
+                                    <Td>
+                                        <IconButton
+                                            onClick={() => handleDelete(time)}
+                                            size='sm'
+                                            aria-label='Delete'
+                                            icon={<AiTwotoneDelete />} />
+                                    </Td>
+                                </Tr>))}
+                        </Tbody>
+                    </Table>
+                </TableContainer>
+            </Container>
         </>
     )
 }
