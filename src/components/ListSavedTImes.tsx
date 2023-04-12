@@ -1,12 +1,11 @@
 
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Button, TableCaption, Container, IconButton } from "@chakra-ui/react"
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, TableCaption, Container, IconButton } from "@chakra-ui/react"
 import { AiTwotoneDelete } from 'react-icons/ai'
 import useTimes from "../hooks/useTimes";
 import showTime from "./Stopwatch";
 
 function ListTimes() {
     const { times } = useTimes();
-
 
     return (
         <>
