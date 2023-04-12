@@ -7,7 +7,7 @@ const NavBar = () => {
     return (
         <HStack justifyContent='space-between' padding='50px'>
             <Image src={stopwatch} boxSize="70px" />
-            <Heading as='h2' size='lg'>STOPWATCH</Heading>
+            <Heading as='h2' size='xl'>STOPWATCH</Heading>
             <ColorModeSwitch />
         </HStack>
     )

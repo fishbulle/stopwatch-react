@@ -1,66 +1,67 @@
-import { Button, Stack } from '@chakra-ui/react'
+import { Box, Button, Center, Stack, Text } from '@chakra-ui/react'
 import { FaPlay, FaStop, FaSave } from 'react-icons/fa'
 import { RxReset } from 'react-icons/rx'
-import { useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
+import timeService, { Time } from '../services/time-service'
+import useTimes from '../hooks/useTimes'
 
-export const showTime = (time: number) => {
-
-    const totalMin = Math.floor(time / 60)
-    const sec = time % 60
-    const hrs = Math.floor(totalMin / 60)
-    const min = totalMin % 60
-
-    if (hrs < 1 && min < 1) return sec + 's'
-    if (hrs < 1) return min + 'm ' + sec + 's'
-
-    return hrs + 'h ' + min + 'm ' + sec + 's'
-}
-
-const Stopwatch = (startValue = 0) => {
-    const [timer, setTimer] = useState(startValue)
+const Stopwatch = () => {
+    const [timer, setTimer] = useState(0)
     const [isRunning, setIsRunning] = useState(false)
-    const countRef = useRef(0)
+    const { times, setTimes, error, setError } = useTimes()
 
-    const handleStart = () => {
-        setIsRunning(true)
-        countRef.current = setInterval(() => {
-            setTimer((timer) => timer + 1)
-        }, 1000)
-    }
+    useEffect(() => {
+        let interval: any;
 
-    const handleReset = () => {
-        clearInterval(countRef.current)
-        setIsRunning(false)
-        setTimer(0)
-    }
+        if (isRunning)
+            interval = setInterval(() => {
+                setTimer(timer => timer + 10)
+            }, 10)
 
-    const handleStop = () => {
-        setIsRunning(false)
-    }
+        if (!isRunning)
+            clearInterval(interval)
 
-    const handleSave = (/*skicka med tiden*/) => {
+        return () => clearInterval(interval)
+    }, [isRunning])
+
+
+    const handleSave = (time: Time) => {
         // fetch POST saveTime
-        setIsRunning(false)
-        clearInterval(countRef.current)
+        timeService.create(time.time)
+            .then(({ data: savedTime }) => setTimes(savedTime))
+            .catch(err => setError(err.message))
+
         setTimer(0)
     }
 
     return (
         <>
+            <Center>
+                <Box mb='50px' h='100px' w='250px' borderWidth='1px' borderRadius='lg' overflow='hidden' justifyContent='center'>
+                    <Stack direction='row' spacing={0} justifyContent="center">
+                        <Text fontSize='6xl'>{("0" + Math.floor((timer / 60000) % 60)).slice(-2)}:</Text>
+                        <Text fontSize='6xl'>{("0" + Math.floor((timer / 1000) % 60)).slice(-2)}:</Text>
+                        <Text fontSize='6xl'>{("0" + ((timer / 10) % 100)).slice(-2)}</Text>
+                    </Stack>
+                </Box>
+            </Center>
+
             <Stack direction='row' spacing={5} justifyContent="center">
-                <Button onClick={() => handleStart()} leftIcon={<FaPlay />} colorScheme='pink' variant='solid'>
+                <Button onClick={() => setIsRunning(true)} leftIcon={<FaPlay />} colorScheme='pink' variant='solid'>
                     Start
                 </Button>
-                <Button onClick={() => handleStop()} leftIcon={<FaStop />} colorScheme='pink' variant='solid'>
+                <Button onClick={() => setIsRunning(false)} leftIcon={<FaStop />} colorScheme='pink' variant='solid'>
                     Stop
                 </Button>
-                <Button onClick={() => handleReset()} leftIcon={<RxReset />} colorScheme='pink' variant='solid'>
+                <Button onClick={() => setTimer(0)} leftIcon={<RxReset />} colorScheme='pink' variant='solid'>
                     Reset
                 </Button>
-                <Button onClick={() => handleSave()} leftIcon={<FaSave />} colorScheme='pink' variant='solid'>
+                <Button /*onClick={() => handleSave()}*/ leftIcon={<FaSave />} colorScheme='pink' variant='solid'>
                     Save
                 </Button>
             </Stack>
         </>
     )
 }
+
+export default Stopwatch

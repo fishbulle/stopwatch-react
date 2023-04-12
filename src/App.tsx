@@ -1,6 +1,6 @@
-import { Button, Grid, GridItem, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Grid, GridItem } from '@chakra-ui/react'
 import NavBar from './components/NavBar'
-import Buttons from './components/Buttons'
+import Stopwatch from './components/Stopwatch'
 import ListTimes from './components/ListSavedTImes'
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Grid templateAreas={`"nav nav"
                             "main main"
                             "footer footer"`}
-            gap='20'>
+            gap='100'>
         <GridItem area="nav">
           <NavBar />
         </GridItem>

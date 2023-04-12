@@ -2,8 +2,18 @@
 import { Text, Table, Thead, Tbody, Tr, Th, Td, TableContainer, TableCaption, Container, IconButton } from "@chakra-ui/react"
 import { AiTwotoneDelete } from 'react-icons/ai'
 import useTimes from "../hooks/useTimes";
-import showTime from "./Stopwatch";
 import timeService, { Time } from "../services/time-service";
+
+const showTime = (timer: number) => {
+    const hours = Math.floor(timer / 360000)
+    const minutes = Math.floor((timer % 360000) / 6000)
+    const seconds = Math.floor((timer % 6000) / 100)
+    const milliseconds = timer % 100
+
+    if (hours < 1 && minutes < 1) return `${seconds}s ${milliseconds}ms`
+    if (hours < 1) return `${minutes}m ${seconds}s ${milliseconds}ms`
+    return `${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`
+}
 
 function ListTimes() {
     const { times, setTimes, error, setError } = useTimes();
