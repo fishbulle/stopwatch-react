@@ -8,8 +8,6 @@ const Buttons = (startValue = 0) => {
     const [isRunning, setIsRunning] = useState(false)
     const countRef = useRef(0)
 
-    // fetch sparade tider
-
     const handleStart = () => {
         setIsRunning(true)
         countRef.current = setInterval(() => {
@@ -32,10 +30,6 @@ const Buttons = (startValue = 0) => {
         setIsRunning(false)
         clearInterval(countRef.current)
         setTimer(0)
-    }
-
-    const handleDelete = () => {
-        // fetch delete
     }
 
     return (
