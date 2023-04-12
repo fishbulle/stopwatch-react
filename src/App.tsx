@@ -15,8 +15,7 @@ function App() {
           <NavBar />
         </GridItem>
         <GridItem area="main">
-          {/* tidtagaruret */}
-          <Buttons />
+          <Stopwatch />
         </GridItem>
         <GridItem area="footer">
           <ListTimes />
