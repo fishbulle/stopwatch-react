@@ -3,7 +3,7 @@ import NavBar from './components/NavBar'
 import Stopwatch from './components/Stopwatch'
 
 function App() {
-
+  
   return (
     <>
       <Grid templateAreas={`"nav nav"
@@ -16,9 +16,6 @@ function App() {
         <GridItem area="main">
           <Stopwatch />
         </GridItem>
-        {/* <GridItem area="footer">
-          <ListTimes />
-        </GridItem> */}
       </Grid>
     </>
   )
