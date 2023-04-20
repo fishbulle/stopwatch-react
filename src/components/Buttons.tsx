@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Buttons = ({ timer, setTimer, setIsRunning }: Props) => {
-    const { times, setTimes, error, setError } = useTimes()
+    const { times, setTimes, setError } = useTimes()
 
     const handleSave = (id: number, time: number, date: number) => {
         // fetch POST saveTime
@@ -22,6 +22,8 @@ const Buttons = ({ timer, setTimer, setIsRunning }: Props) => {
             .catch(err => setError(err.message))
 
         setTimer(0)
+
+        // hur får jag tiden att läggas till i listan automatiskt så det syns i frontend?
     }
 
     return (
