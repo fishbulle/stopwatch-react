@@ -14,16 +14,22 @@ const Buttons = ({ timer, setTimer, setIsRunning }: Props) => {
     const { times, setTimes, setError } = useTimes()
 
     const handleSave = (id: number, time: number, date: number) => {
+        const originalTimes = [...times]
+        const newTime = { id, time, date }
+        setTimes([newTime, ...times])
         // fetch POST saveTime
-        timeService.create({ id, time, date })
+        timeService.create(newTime)
             .then(({ data: savedTime }) => {
                 setTimes([savedTime, ...times])
             })
-            .catch(err => setError(err.message))
+            .catch(err => {
+                setError(err.message)
+                setTimes(originalTimes)
+            })
 
         setTimer(0)
 
-        // hur får jag tiden att läggas till i listan automatiskt så det syns i frontend?
+        // hur får jag tiden att synaas i listan? 
     }
 
     return (

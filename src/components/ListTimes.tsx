@@ -10,12 +10,10 @@ const ListTimes = () => {
 
     const handleDelete = (time: Time) => {
         setTimes(times.filter(t => t.id !== time.id))
-
         // Delete saved time fetch
         timeService.delete(time.id)
             .catch(err => setError(err.message))
     }
-
 
     return (
         <>
@@ -50,7 +48,6 @@ const ListTimes = () => {
             </Container>
         </>
     )
-
 }
 
 export default ListTimes
