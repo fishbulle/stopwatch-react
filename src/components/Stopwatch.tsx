@@ -6,11 +6,11 @@ import { AiTwotoneDelete } from 'react-icons/ai'
 import timeService, { Time } from '../services/time-service'
 import useTimes from '../hooks/useTimes'
 import showTime from './ShowTime'
+import Buttons from './Buttons'
 
 const Stopwatch = () => {
     const [timer, setTimer] = useState(0)
     const [isRunning, setIsRunning] = useState(false)
-    const { times, setTimes, error, setError } = useTimes()
 
     useEffect(() => {
         let interval: any;
@@ -27,29 +27,28 @@ const Stopwatch = () => {
     }, [isRunning])
 
 
-    const handleSave = (id: number, time: number, date: number) => {
-        // fetch POST saveTime
-        timeService.create({ id, time, date })
-            .then(({ data: savedTime }) => {
-                setTimes([savedTime, ...times])
-            })
-            .catch(err => setError(err.message))
+    // const handleSave = (id: number, time: number, date: number) => {
+    //     // fetch POST saveTime
+    //     timeService.create({ id, time, date })
+    //         .then(({ data: savedTime }) => {
+    //             setTimes([savedTime, ...times])
+    //         })
+    //         .catch(err => setError(err.message))
 
-        setTimer(0)
-    }
+    //     setTimer(0)
+    // }
 
-    const handleDelete = (time: Time) => {
-        setTimes(times.filter(t => t.id !== time.id))
+    // const handleDelete = (time: Time) => {
+    //     setTimes(times.filter(t => t.id !== time.id))
 
-        // Delete saved time fetch
-        timeService.delete(time.id)
-            .catch(err => setError(err.message))
-    }
+    //     // Delete saved time fetch
+    //     timeService.delete(time.id)
+    //         .catch(err => setError(err.message))
+    // }
 
     return (
         <>
             <Center>
-                {error && <Text>{error}</Text>}
                 <Box mb='50px' h='100px' w='250px' borderWidth='1px' borderRadius='lg' overflow='hidden' justifyContent='center'>
                     <Stack direction='row' spacing={0} justifyContent="center">
                         <Text fontSize='6xl'>{("0" + Math.floor((timer / 60000) % 60)).slice(-2)}:</Text>
@@ -58,8 +57,9 @@ const Stopwatch = () => {
                     </Stack>
                 </Box>
             </Center>
+            <Buttons timer={timer} setTimer={setTimer} setIsRunning={setIsRunning} />
 
-            <Stack direction='row' spacing={5} justifyContent="center">
+            {/* <Stack direction='row' spacing={5} justifyContent="center">
                 <Button onClick={() => setIsRunning(true)} leftIcon={<FaPlay />} colorScheme='pink' variant='solid'>
                     Start
                 </Button>
@@ -72,9 +72,9 @@ const Stopwatch = () => {
                 <Button onClick={() => handleSave(0, timer, 0)} leftIcon={<FaSave />} colorScheme='pink' variant='solid'>
                     Save
                 </Button>
-            </Stack>
+            </Stack> */}
 
-            <Container mt="50px" maxW='lg' centerContent>
+            {/* <Container mt="50px" maxW='lg' centerContent>
                 {error && <Text>{error}</Text>}
                 <TableContainer>
                     <Table size='md' variant='striped' colorScheme='pink'>
@@ -102,7 +102,7 @@ const Stopwatch = () => {
                         </Tbody>
                     </Table>
                 </TableContainer>
-            </Container>
+            </Container> */}
         </>
     )
 }
