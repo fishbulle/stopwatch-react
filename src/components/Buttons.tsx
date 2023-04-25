@@ -16,12 +16,11 @@ const Buttons = ({ timer, setTimer, setIsRunning }: Props) => {
     const handleSave = (id: number, time: number, date: number) => {
         const originalTimes = [...times]
         const newTime = { id, time, date }
-        setTimes([newTime, ...times])
+
         // fetch POST saveTime
         timeService.create(newTime)
-            .then(({ data: savedTime }) => {
-                setTimes([savedTime, ...times])
-            })
+            .then(({ data: savedTime }) =>
+                setTimes([savedTime, ...times]))
             .catch(err => {
                 setError(err.message)
                 setTimes(originalTimes)
@@ -29,7 +28,7 @@ const Buttons = ({ timer, setTimer, setIsRunning }: Props) => {
 
         setTimer(0)
 
-        // hur får jag tiden att synaas i listan? 
+        // hur får jag tiden att synaas direkt i listan utan att behöva refresha? 
     }
 
     return (
