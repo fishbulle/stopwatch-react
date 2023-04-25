@@ -14,17 +14,15 @@ const Buttons = ({ timer, setTimer, setIsRunning }: Props) => {
     const { times, setTimes, setError } = useTimes()
 
     const handleSave = (id: number, time: number, date: number) => {
-        const originalTimes = [...times]
-        const newTime = { id, time, date }
-
-        // fetch POST saveTime
+        const newTime = {
+            id: id,
+            time: time,
+            date: date
+        }
+                // fetch POST saveTime
         timeService.create(newTime)
-            .then(({ data: savedTime }) =>
-                setTimes([savedTime, ...times]))
-            .catch(err => {
-                setError(err.message)
-                setTimes(originalTimes)
-            })
+            .then(res => setTimes(res.data))
+            .catch(err => setError(err.message))
 
         setTimer(0)
 
