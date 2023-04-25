@@ -17,7 +17,7 @@ const useTimes = () => {
             })
 
         return () => cancel()
-    }, [])
+    }, [times])
 
     return { times, setTimes, error, setError }
 }
