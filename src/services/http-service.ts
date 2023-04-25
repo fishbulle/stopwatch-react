@@ -9,10 +9,7 @@ class HttpService {
 
     getAll<T>() {
         const controller = new AbortController();
-        const request = apiClient.get<T[]>(this.endpoint, {
-            signal: controller.signal
-        })
-
+        const request = apiClient.get<T[]>(this.endpoint)
         return { request, cancel: () => controller.abort() }
     }
 
