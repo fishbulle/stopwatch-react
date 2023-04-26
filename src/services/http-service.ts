@@ -1,4 +1,5 @@
 import apiClient from "./api-client";
+import { Time } from "./time-service";
 
 class HttpService {
     endpoint: string
@@ -12,6 +13,10 @@ class HttpService {
         const request = apiClient.get<T[]>(this.endpoint)
         return { request, cancel: () => controller.abort() }
     }
+
+    // getSavedTimes() {
+    //     return apiClient.get<Time[]>(this.endpoint).then(res => res.data)
+    // }
 
     delete(id: number) {
         return apiClient.delete(this.endpoint + '/' + id)

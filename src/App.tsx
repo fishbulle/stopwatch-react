@@ -1,6 +1,7 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import NavBar from './components/NavBar'
 import Stopwatch from './components/Stopwatch'
+import ListTimes from './components/ListTimes'
 
 function App() {
   
@@ -14,6 +15,7 @@ function App() {
         </GridItem>
         <GridItem area="main">
           <Stopwatch />
+          <ListTimes />
         </GridItem>
       </Grid>
     </>
