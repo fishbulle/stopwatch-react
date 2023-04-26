@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 const ListTimes = () => {
-    const { times, setTimes, error, setError } = useTimes()
+    const { times, setTimes, setError } = useTimes()
     
     const handleDelete = (time: Time) => {
         setTimes(times.filter(t => t.id !== time.id))
@@ -22,13 +22,13 @@ const ListTimes = () => {
             .get<Time[]>('http://localhost:8080/api/timer')
             .then(res => res.data)
 
-    const { data: savedTimes } = useQuery({
+    const { data: savedTimes, error } = useQuery<Time[], Error>({
         queryKey: ['times'],
         queryFn: fetchSavedTime,
         refetchInterval: 1000
         })
 
-    // lägga till error hantering
+    if (error) return <p>{error.message}</p>
 
     return (
         <>
