@@ -28,7 +28,7 @@ const ListTimes = () => {
         refetchInterval: 1000
         })
 
-    // lägga till en useQuery för att refetcha listan
+    // lägga till error hantering
 
     return (
         <>
