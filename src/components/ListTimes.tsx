@@ -6,9 +6,11 @@ import { Time } from '../services/time-service'
 import { AiTwotoneDelete } from 'react-icons/ai'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import useSavedTimes from '../hooks/useSavedTimes'
 
 const ListTimes = () => {
     const { times, setTimes, setError } = useTimes()
+    const { data: savedTimes, error } = useSavedTimes()
     
     const handleDelete = (time: Time) => {
         setTimes(times.filter(t => t.id !== time.id))
@@ -16,18 +18,6 @@ const ListTimes = () => {
         timeService.delete(time.id)
             .catch(err => setError(err.message))
     }
-
-    // TODO lägga i egen component:
-    const fetchSavedTime = () =>
-        axios
-            .get<Time[]>('http://localhost:8080/api/timer')
-            .then(res => res.data)
-
-    const { data: savedTimes, error } = useQuery<Time[], Error>({
-        queryKey: ['times'],
-        queryFn: fetchSavedTime,
-        refetchInterval: 1000
-        })
 
     if (error) return <p>{error.message}</p>
 
