@@ -26,7 +26,7 @@ const Buttons = ({ timer, setTimer, setIsRunning }: Props) => {
 
     return (
         <>
-            {error && <Text>Something went wrong!</Text>}
+            {error && <Text>{error}</Text>}
             <Stack direction='row' spacing={5} justifyContent="center">
                 <Button onClick={() => setIsRunning(true)} leftIcon={<FaPlay />} colorScheme='pink' variant='solid'>
                     Start
