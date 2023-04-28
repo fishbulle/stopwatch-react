@@ -1,4 +1,4 @@
-import { Button, Stack } from "@chakra-ui/react"
+import { Button, Stack, Text } from "@chakra-ui/react"
 import useTimes from "../hooks/useTimes"
 import timeService from "../services/time-service"
 import { FaPlay, FaSave, FaStop } from "react-icons/fa"
@@ -26,6 +26,7 @@ const Buttons = ({ timer, setTimer, setIsRunning }: Props) => {
 
     return (
         <>
+            {error && <Text>Something went wrong!</Text>}
             <Stack direction='row' spacing={5} justifyContent="center">
                 <Button onClick={() => setIsRunning(true)} leftIcon={<FaPlay />} colorScheme='pink' variant='solid'>
                     Start
