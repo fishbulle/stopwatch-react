@@ -17,6 +17,7 @@ const ListTimes = () => {
             .catch(err => setError(err.message))
     }
 
+    // TODO lägga i egen component:
     const fetchSavedTime = () =>
         axios
             .get<Time[]>('http://localhost:8080/api/timer')
