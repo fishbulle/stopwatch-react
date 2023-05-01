@@ -4,8 +4,6 @@ import timeService from "../services/time-service"
 import showTime from './ShowTime'
 import { Time } from '../services/time-service'
 import { AiTwotoneDelete } from 'react-icons/ai'
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import useSavedTimes from '../hooks/useSavedTimes'
 
 const ListTimes = () => {
