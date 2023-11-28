@@ -7,7 +7,7 @@ const Stopwatch = () => {
     const [isRunning, setIsRunning] = useState(false)
 
     useEffect(() => {
-        let interval: any;
+        let interval: number | undefined;
 
         if (isRunning)
             interval = setInterval(() => {
